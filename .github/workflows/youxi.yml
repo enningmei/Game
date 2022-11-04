@@ -27,3 +27,5 @@ jobs:
       #unreal --- 认领虚幻商城月免内容
       #get    --- 搬空游戏商城的免费游戏或免费DLC
       #默认指令为 python3 main.py claim 表示仅执行周免认领任务 
+env:
+PUSHER_SERVERCHAN: ${{ secrets.PUSHER_SERVERCHAN }}
