@@ -1,0 +1,29 @@
+name: Epic-YYDS
+ 
+on:
+  workflow_dispatch:
+  schedule:
+   # 定时执行可参考https://tool.lu/crontab
+    - cron: 22 6 */3 * *
+ 
+jobs:
+  setup:
+    env:
+      EPIC_EMAIL: ${{ secrets.EPIC_EMAIL }}
+      EPIC_PASSWORD: ${{ secrets.EPIC_PASSWORD }}
+      PUSHER_TELEGRAM: ${{ secrets.PUSHER_TELEGRAM }}
+      PLAYER: ${{ secrets.EPIC_PLAYER }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Scaffold Claim
+        run: |
+          docker run --rm --pull always --init \
+          -e EPIC_EMAIL \
+          -e EPIC_PASSWORD \
+          -e PUSHER_TELEGRAM \
+          -e PLAYER \
+          ech0sec/awesome-epic:daddy xvfb-run python3 main.py claim
+      #claim  --- 认领游戏商城周免游戏及其免费DLC
+      #unreal --- 认领虚幻商城月免内容
+      #get    --- 搬空游戏商城的免费游戏或免费DLC
+      #默认指令为 python3 main.py claim 表示仅执行周免认领任务 
